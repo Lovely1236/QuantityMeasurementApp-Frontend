@@ -1,3 +1,4 @@
+import React from "react";
 function QuantityTypeCard({ type, selectedType, onSelectType }) {
   return (
     <div

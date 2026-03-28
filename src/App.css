@@ -173,7 +173,7 @@ button {
   height: 46px;
   border: none;
   border-radius: 6px;
-  background: #a52a36;
+  background: #742aa5;
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -182,7 +182,7 @@ button {
 }
 
 button:hover {
-  background: #8a1f2c;
+  background: #4f1175;
 }
 
 .dashboard-page {
@@ -198,7 +198,7 @@ button:hover {
 }
 
 .top-bar {
-  background: linear-gradient(90deg, #3357f5, #4b73ff);
+  background: linear-gradient(90deg, #9741da, #4b73ff);
   color: white;
   padding: 18px 22px;
   border-radius: 14px 14px 0 0;

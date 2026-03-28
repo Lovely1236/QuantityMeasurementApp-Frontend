@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import React from "react";
 function AuthPage({ onLoginSuccess }) {
   const [activeTab, setActiveTab] = useState("login");
 

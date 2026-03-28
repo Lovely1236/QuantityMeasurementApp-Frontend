@@ -3,7 +3,7 @@ import { quantityTypes, operationOptions, unitsMap } from "../data/quantityData"
 import QuantityTypeCard from "./QuantityTypeCard";
 import OperationSelector from "./OperationSelector";
 import InputSection from "./InputSection";
-
+import React from "react";
 function Dashboard({ onLogout }) {
   const [selectedType, setSelectedType] = useState("length");
   const [selectedOperation, setSelectedOperation] = useState("conversion");
