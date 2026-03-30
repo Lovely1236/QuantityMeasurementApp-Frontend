@@ -14,7 +14,7 @@ export const operationOptions = [
 ];
 
 export const unitsMap = {
-  length: ["Centimetre", "Yard", "Inch", "Foot"],
+  length: ["Centimeter", "Yard", "Inch", "Foot"],
   weight: ["Gram", "Kilogram","Pound"],
   volume: ["Millilitre", "Litre", "Gallon"],
   temperature: ["Celsius", "Fahrenheit"],

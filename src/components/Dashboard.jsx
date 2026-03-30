@@ -4,7 +4,9 @@ import QuantityTypeCard from "./QuantityTypeCard";
 import OperationSelector from "./OperationSelector";
 import InputSection from "./InputSection";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 function Dashboard({ onLogout }) {
+  const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState("length");
   const [selectedOperation, setSelectedOperation] = useState("conversion");
 
@@ -30,9 +32,18 @@ function Dashboard({ onLogout }) {
             <h2>Welcome To Quantity Measurement</h2>
           </div>
 
-          <button className="logout-btn" onClick={onLogout}>
-            Logout
-          </button>
+          <div style={{display: "flex", gap: "10px"}}>
+            <button
+                className="history-btn"
+                onClick={() => navigate("/history")}
+            >
+              History
+            </button>
+
+            <button className="logout-btn" onClick={onLogout}>
+              Logout
+            </button>
+          </div>
         </header>
 
         <div className="dashboard-content">
@@ -40,8 +51,8 @@ function Dashboard({ onLogout }) {
 
           <div className="type-card-container">
             {quantityTypes.map((type) => (
-              <QuantityTypeCard
-                key={type.id}
+                <QuantityTypeCard
+                    key={type.id}
                 type={type}
                 selectedType={selectedType}
                 onSelectType={handleTypeChange}
@@ -67,13 +78,7 @@ function Dashboard({ onLogout }) {
             <p className="note-text">Temperature supports conversion only.</p>
           )}
 
-          <button className="primary-action-btn">
-            {selectedOperation === "conversion"
-              ? "Convert"
-              : selectedOperation === "comparison"
-              ? "Compare"
-              : "Calculate"}
-          </button>
+
         </div>
       </div>
     </div>
