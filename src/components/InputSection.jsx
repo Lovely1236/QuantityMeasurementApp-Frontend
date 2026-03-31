@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import {useEffect}  from "react";
+import React, { useState, useEffect } from "react";
 
 function InputSection({ selectedType, selectedOperation, unitsMap }) {
   const [value1, setValue1] = useState("");
@@ -7,18 +6,24 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
   const [unit1, setUnit1] = useState("CENTIMETER");
   const [unit2, setUnit2] = useState("CENTIMETER");
   const [result, setResult] = useState("");
+
+  // ✅ BASE URL (single source of truth)
+  const BASE_URL = "https://quantitymeasurementapp-r98c.onrender.com";
+
   const unitMap = {
     Centimetre: "CENTIMETER",
     Yard: "YARDS",
     Inch: "INCH",
-    Foot: "FEET"
+    Foot: "FEET",
   };
+
   const typeMap = {
     length: "LENGTH",
     weight: "WEIGHT",
     volume: "VOLUME",
-    temperature: "TEMPERATURE"
+    temperature: "TEMPERATURE",
   };
+
   useEffect(() => {
     const units = unitsMap[selectedType];
 
@@ -31,13 +36,14 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
       setValue2("");
       setResult("");
     }
-  }, [selectedType]);
+  }, [selectedType, unitsMap]);
 
+  // ✅ COMPARE
   const handleCompare = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8080/measurements/compare", {
+      const res = await fetch(`${BASE_URL}/measurements/compare`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,17 +60,17 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
 
       const data = await res.json();
       setResult(data.data.equal ? "Equal" : "Not Equal");
-
     } catch (err) {
       alert("Compare failed");
     }
   };
 
+  // ✅ CONVERT
   const handleConvert = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8080/measurements/convert", {
+      const res = await fetch(`${BASE_URL}/measurements/convert`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,17 +86,19 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
 
       const data = await res.json();
 
-      setValue2(data.data.result.split(" ")[0]); // only number
+      setValue2(data.data.result.split(" ")[0]);
       setResult(data.data.result);
     } catch (err) {
       alert("Conversion failed");
     }
   };
+
+  // ✅ ADD / SUBTRACT / DIVIDE
   const handleArithmetic = async (type) => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:8080/measurements/${type}`, {
+      const res = await fetch(`${BASE_URL}/measurements/${type}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,9 +119,7 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
       }
 
       const data = await res.json();
-
       setResult(data.data.result);
-
     } catch (err) {
       alert(type + " failed: " + err.message);
     }
@@ -124,23 +130,18 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
       case "comparison":
         handleCompare();
         break;
-
       case "conversion":
         handleConvert();
         break;
-
       case "addition":
         handleArithmetic("add");
         break;
-
       case "subtraction":
         handleArithmetic("subtract");
         break;
-
       case "division":
         handleArithmetic("divide");
         break;
-
       default:
         alert("Invalid operation");
     }
@@ -183,7 +184,7 @@ function InputSection({ selectedType, selectedOperation, unitsMap }) {
 
         <div className="input-box full-width">
           <label>RESULT</label>
-          <input type="text" value={result || ""} readOnly/>
+          <input type="text" value={result || ""} readOnly />
         </div>
 
         <button className="compare-btn" onClick={handleAction}>
