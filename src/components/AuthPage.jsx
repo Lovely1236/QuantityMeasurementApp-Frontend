@@ -104,10 +104,10 @@ function AuthPage({ onLoginSuccess }) {
                   <button
                       type="button"
                       className="google-btn"
-                      onClick={() =>
-                          (window.location.href =
-                              "http://localhost:8080/oauth2/authorization/google")
-                      }
+                      onClick={() => {
+                        const BASE_URL = "https://quantitymeasurementapp-r98c.onrender.com";
+                        window.location.href = `${BASE_URL}/oauth2/authorization/google`;
+                      }}
                   >
                     <img
                         src="https://developers.google.com/identity/images/g-logo.png"
@@ -152,10 +152,10 @@ function AuthPage({ onLoginSuccess }) {
                   <button
                       type="button"
                       className="google-btn"
-                      onClick={() =>
-                          (window.location.href =
-                              "http://localhost:8080/oauth2/authorization/google")
-                      }
+                      onClick={() => {
+                        const BASE_URL = "https://quantitymeasurementapp-r98c.onrender.com";
+                        window.location.href = `${BASE_URL}/oauth2/authorization/google`;
+                      }}
                   >
                     <img
                         src="https://developers.google.com/identity/images/g-logo.png"
